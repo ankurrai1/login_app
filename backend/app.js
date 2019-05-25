@@ -10,6 +10,7 @@ const compression = require("compression");
 
 const expressValidator = require("express-validator");
 const session = require('express-session');
+const MongoStore = require("connect-mongo")(session)
 
 const app = express();
 dotenv.config({path: ".env"});
@@ -17,15 +18,26 @@ app.set("port", process.env.PORT);
 
 const mongoUrl = process.env.TEST ? process.env.MONGO_TEST : process.env.MONGO_URI;
 (mongoose).Promise = bluebird;
-mongoose.connect(mongoUrl, {useNewUrlParser: true})
+mongoose.connect(mongoUrl)
         .then(() => console.log("Connected to Mongo DB"))
 .catch(err =>console.log("MongoDB connection error. Please make sure MongoDB is running. " + err));
+
 
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressValidator());
 app.use(expressValidator());
+
+app.use(session({
+    resave: true,
+    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET,
+    store: new MongoStore({
+        url: mongoUrl,
+        autoReconnect: true
+    })
+}));
 
 app.use(cors());
 
