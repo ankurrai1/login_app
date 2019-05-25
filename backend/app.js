@@ -1,10 +1,10 @@
-const path = require('path');
-const logger = require("morgan"); // to log user requested url on server
+// const path = require('path');
+// const logger = require("morgan"); // to log user requested url on server
 const dotenv = require("dotenv"); // to config envirnment
 const express = require("express");
-const mongoose = require('mongoose');
-const mongo = require("connect-mongo")
-const bodyParser = require("body-parser");
+// const mongoose = require('mongoose');
+// const mongo = require("connect-mongo")
+// const bodyParser = require("body-parser");
 
 
 const app = express();
