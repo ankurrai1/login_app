@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "mocha --recurcive",
+    "test": "set NODE_ENV=test&& mocha --recurcive",
     "coverage": "nyc --reporter=html --reporter=text mocha --recursive && start coverage/index.html"
   },
   "repository": {
