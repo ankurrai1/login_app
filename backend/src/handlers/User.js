@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const { check, validationResult } = require('express-validator/check');
 const { matchedData } = require("express-validator/filter");
-const {tokenHelper} = require("../helper");
+const {tokenHelper} = require("../helpers");
 
 exports.create = async (req, res) => {
     const errors = await validationResult(req);
@@ -18,7 +18,6 @@ exports.create = async (req, res) => {
         });
         return res.status(200).json({ token, save, message: "User has been created" });
     } catch (errors) {
-        console.log("i am sending error", errors);
         return res.status(500).json({ errors: errors.mapped() });
     }
 };
