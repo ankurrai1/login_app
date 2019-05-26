@@ -52,6 +52,12 @@ app.use(function (req, res, next) {
     next();
 });
 
+const user = require("./src/routes/user");
+const auth = require("./src/routes/auth");
+
+app.use("/user", user);
+app.use("/login", auth);
+
 app.get('/', function(req, res){ 
     res.send('<html>all is well...</html>');
 });
