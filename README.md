@@ -26,3 +26,14 @@ to Start angular app
 cd client
 npm start
 ```
+
+To Start client and backend together Need Docker
+
+steps for Docker 
+
+```
+npm install
+docker-compose up 
+docker-compose up --build 
+docker-compose up -d
+```
