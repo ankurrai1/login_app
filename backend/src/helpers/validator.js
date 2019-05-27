@@ -9,6 +9,7 @@ const objectId = (value) => {
 };
 
 const fields = (value, modelName, nested = false) => {
+
     if (!value || !Object.keys(value).length) {
         throw new Error("Field is empty");
     }

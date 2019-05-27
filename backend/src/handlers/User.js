@@ -18,6 +18,8 @@ exports.create = async (req, res) => {
         });
         return res.status(200).json({ token, save, message: "User has been created" });
     } catch (errors) {
+        if (errors.name === 'BulkWriteError' && errors.code === 11000)
+            return res.status(421).json({ errors: 'This email already exists, please try again' })
         return res.status(500).json({ errors: errors.mapped() });
     }
 };

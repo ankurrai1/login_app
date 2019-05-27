@@ -26,6 +26,11 @@ exports.authJwt = (req, res, next) => {
     if (req.originalUrl === "/user" && req.method === "POST") {
         return next();
     }
+    const token = req.headers["user-access-token"];
+    if (!token) {
+        return res.status(401).json({ errors: "Not a valid token" });
+    }
+
     try {
         req.user = tokenHelper.decode(token);
         return next();
