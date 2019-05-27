@@ -42,11 +42,10 @@ UserSchema.methods.comparePassword = async function (userPassword) {
     return bcrypt.compare(userPassword, this.password);
 };
 
-const User = mongoose.model("User", UserSchema);
-// let User
-// try {
-//     User = mongoose.model('User')
-// } catch (error) {
-//     User = mongoose.model('User', UserSchema)
-// }
+let User
+try {
+    User = mongoose.model('User')
+} catch (error) {
+    User = mongoose.model('User', UserSchema)
+}
 module.exports = User;

@@ -1,5 +1,4 @@
-const mongoose =require("mongoose");
-let User = mongoose.model('User')
+const User = require("../models/user")
 const { check, validationResult } = require('express-validator/check');
 const { matchedData } = require("express-validator/filter");
 const {tokenHelper} = require("../helpers");
