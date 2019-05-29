@@ -1,8 +1,5 @@
 const request = require("supertest");
 let app = require("../app.js");
-const bluebird = require("bluebird");
-const mongoose = require('mongoose');
-
 const { User, UserSchema } =  require("../src/models/user");
 
 const mockUser = {

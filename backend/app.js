@@ -1,4 +1,3 @@
-const path = require('path');
 const logger = require("morgan"); // to log user requested url on server
 const dotenv = require("dotenv"); // to config envirnment
 const cors = require("cors"); // for cross-origin resource shearing at http.
