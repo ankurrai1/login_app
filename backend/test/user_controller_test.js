@@ -9,8 +9,6 @@ let userEmail;
 let userToken;
 const fakeId = new ObjectId();
 
-jest.setTimeout(10000);
-
 describe(" #POST /user", () => {
     it("should create user", async () => {
         const res = await request(app).post("/user")

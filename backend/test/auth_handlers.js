@@ -5,36 +5,23 @@ const mongoose = require('mongoose');
 
 const { User, UserSchema } =  require("../src/models/user");
 
-
-(mongoose).Promise = bluebird;
-
 const mockUser = {
     email: "login@login.com",
     password: "123456"
 };
 
-beforeAll(() => {
-    mongoose.connect(process.env.MONGO_TEST, { useMongoClient: true }).then(
-        () => { console.log("Connected to Test DB"); }
-    ).catch(err => {
-        console.log("MongoDB connection error. Please make sure MongoDB is running. " + err);
-    });
-});
-
-beforeEach(async () => {
-    const user = new User(mockUser);
-    return user.save();
-});
-
-afterEach(async () => {
-    await User.remove({ email: "login@login.com" }).exec();
-});
-
-afterAll((done) => {
-    mongoose.disconnect(done);
-});
 
 describe(" #POST /login ", () => {
+
+    beforeEach(async () => {
+        const user = new User(mockUser);
+        return user.save();
+    });
+    
+    afterEach(async () => {
+        await User.remove({ email: "login@login.com" }).exec();
+    });
+
     it("should login a user and create a token", async () => {
         const res = await request(app).post("/login")
         .send({

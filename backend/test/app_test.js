@@ -1,19 +1,7 @@
 const request = require("supertest");
 let app = require("../app.js");
-const bluebird = require("bluebird");
-const mongoose = require('mongoose');
 
 describe("APP", () => {
-
-    before(() => {
-        (mongoose).Promise = bluebird;
-        mongoose.connect(process.env.MONGO_TEST).then(
-            () => { console.log("Connected to Test DB"); }
-        ).catch(err => {
-            console.log("MongoDB connection error. Please make sure MongoDB is running. " + err);
-        });
-    });
-    
 
     beforeEach(function () {
         handleError = function (done) {

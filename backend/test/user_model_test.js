@@ -1,7 +1,5 @@
 const { User, UserSchema } = require("../src/models/user");
 
-(mongoose).Promise = bluebird;
-
 const mockUser = {
     email: "foo@foo.com",
     fullName:"",
@@ -10,29 +8,18 @@ const mockUser = {
 
 let user;
 
-beforeAll(() => {
-    mongoose.connect(process.env.MONGO_TEST).then(
-        () => { console.log("Connected to Test DB"); }
-    ).catch(err => {
-        console.log("MongoDB connection error. Please make sure MongoDB is running. " + err);
-    });
-});
-
-beforeEach(async () => {
-    user = new User(mockUser);
-    return user.save();
-});
-
-afterEach(async () => {
-    await User.remove({ email: "bar@bar.com" }).exec();
-    await User.remove({ _id: user._id }).exec();
-});
-
-afterAll((done) => {
-    mongoose.disconnect(done);
-});
-
 describe("User model", () => {
+
+    beforeEach(async () => {
+        user = new User(mockUser);
+        return user.save();
+    });
+    
+    afterEach(async () => {
+        await User.remove({ email: "bar@bar.com" }).exec();
+        await User.remove({ _id: user._id }).exec();
+    });
+
     it("should bcrypt the password", async () => {
         const user = await User.findOne({ email: "foo@foo.com" });
         expect(user.password).not.toBe("123456");

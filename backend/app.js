@@ -12,12 +12,18 @@ const lusca = require("lusca");
 const expressValidator = require("express-validator");
 const session = require('express-session');
 const MongoStore = require("connect-mongo")(session)
-
 const app = express();
 dotenv.config({path: ".env"});
-app.set("port", process.env.PORT);
 
-const mongoUrl = process.env.NODE_ENV=="test" ? process.env.MONGO_TEST : process.env.MONGO_URI;
+let port = process.env.PORT ;
+let mongoUrl = process.env.MONGO_URI;
+
+if (process.env.NODE_ENV=="test") {
+    port = process.env.PORT_TEST;
+    mongoUrl = process.env.MONGO_TEST;
+}
+
+app.set("port", port);
 
 (mongoose).Promise = bluebird;
 mongoose.connect(mongoUrl)

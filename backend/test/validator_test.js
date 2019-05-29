@@ -1,17 +1,7 @@
 const { ObjectId }=  require("mongodb");
 let app =  require("../app")
 const { validator } = require("../src/helpers/index")
-let server
 const fakeID = new ObjectId();
-
-beforeAll(async () => {
-    server = app.listen(process.env.PORT_TEST);
-    console.log("[PORT]", process.env.PORT_TEST);
-});
-
-afterAll(() => {
-    server.close();
-});
 
 describe(" ObjectId Validator ", () => {
     it("should return true", () => {
