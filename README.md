@@ -1,4 +1,4 @@
-# login_app
+# ***LOGIN APP***
 basic login app allow to login and register with jwt auth.
 
 This is the open source express js based app to example of login in Mean-Stack
@@ -46,6 +46,7 @@ npm start
 To Start client and backend together Need Docker
 
 steps for Docker 
+----
 
 ```
 npm install
